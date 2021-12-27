@@ -3,6 +3,8 @@ import dynamic from 'next/dynamic'
 import { Header } from "../components/Header";
 import { Sidebar } from "../components/Sidebar";
 import { ApexOptions } from 'apexcharts';
+import { useContext } from "react";
+import { AuthContext } from "../contexts/AuthContext";
 
 const Chart = dynamic(() => import('react-apexcharts'), {
   ssr: false
@@ -66,7 +68,7 @@ const series = [
 ]
 
 export default function Dashboard() {
-
+  const { user } = useContext(AuthContext)
 
   return (
     <Flex direction="column" h="100vh" >
