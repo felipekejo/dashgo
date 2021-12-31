@@ -8,6 +8,7 @@ import { AuthContext } from "../contexts/AuthContext";
 import { withSSRAuth } from "../utils/withSSRAuth";
 import { setupApiClient } from "../services/api";
 import { useCan } from "../services/hooks/useCan";
+import { Can } from "../components/Can";
 
 const Chart = dynamic(() => import('react-apexcharts'), {
   ssr: false
@@ -73,9 +74,7 @@ const series = [
 export default function Dashboard() {
   const { user } = useContext(AuthContext)
 
-  const userCanSeeMetrics = useCan({
-    permissions: ['metrics.list']
-  })
+
 
   return (
     <Flex direction="column" h="100vh" >
@@ -83,7 +82,7 @@ export default function Dashboard() {
 
       <Flex w="100%" my="6" maxWidth={1480} mx="auto" px="6">
         <Sidebar />
-        {userCanSeeMetrics && (
+        <Can permissions={['metrics.list']}>
           <SimpleGrid flex="1" gap="4" minChildWidth="520px" align="flex-start">
 
             <Box
@@ -110,7 +109,7 @@ export default function Dashboard() {
 
             </Box>
           </SimpleGrid>
-        )}
+        </Can>
 
       </Flex>
     </Flex>
