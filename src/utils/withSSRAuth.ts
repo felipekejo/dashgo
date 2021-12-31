@@ -6,7 +6,7 @@ export function withSSRAuth<P>(fn: GetServerSideProps<P>): GetServerSideProps {
   return async (ctx: GetServerSidePropsContext): Promise<GetServerSidePropsResult<P>> => {
     const cookies = parseCookies(ctx)
 
-    if (!cookies['godash.token']) {
+    if (!cookies['dashgo.token']) {
       return {
         redirect: {
           destination: '/',

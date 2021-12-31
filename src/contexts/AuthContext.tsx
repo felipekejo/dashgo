@@ -7,7 +7,7 @@ import { api } from "../services/apiClient";
 
 type User = {
   email: string;
-  permission: string[];
+  permissions: string[];
   roles: string[];
 }
 
@@ -44,8 +44,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
     if (token) {
       api.get('/me',).then(response => {
-        const { email, permission, roles } = response.data
-        setUser({ email, permission, roles })
+        const { email, permissions, roles } = response.data
+        setUser({ email, permissions, roles })
       })
         .catch(() => {
           signOut()
@@ -60,7 +60,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         password
       })
 
-      const { token, refreshToken, permission, roles } = response.data
+      const { token, refreshToken, permissions, roles } = response.data
 
       setCookie(undefined, 'dashgo.token', token, {
         maxAge: 60 * 60 * 24 * 30, //30 days
@@ -73,7 +73,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
       setUser({
         email,
-        permission,
+        permissions,
         roles
       })
 
