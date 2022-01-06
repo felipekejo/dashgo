@@ -1,7 +1,13 @@
 import { HStack, Icon } from "@chakra-ui/react";
-import { RiNotificationLine, RiUserLine } from "react-icons/ri";
+import { useContext } from "react";
+import { RiNotificationLine, RiUserLine, RiLogoutCircleRLine } from "react-icons/ri";
+import { AuthContext } from "../../contexts/AuthContext";
 
 export function NotificationNav() {
+
+  const { signOut } = useContext(AuthContext)
+
+
   return (
     <HStack
       spacing={["6", "8"]}
@@ -14,6 +20,7 @@ export function NotificationNav() {
     >
       <Icon as={RiNotificationLine} fontSize="20" />
       <Icon as={RiUserLine} fontSize="20" />
+      <Icon as={RiLogoutCircleRLine} fontSize="20" onClick={signOut} />
     </HStack>
   )
 }
